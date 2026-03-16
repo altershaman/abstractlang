@@ -2,7 +2,8 @@
 
 > [!TIP]
 > Formal language for expressing knowledge about worlds. 
-
+>
+> [Why 'yet another knowledge system'?](/abstractlang_comparative.md)
 ---
 In Abstract Language (abstractlang) the only precise irreducible knowledge unit which cannot be decomposed further without losing the knowledge is **judgment**.
 
