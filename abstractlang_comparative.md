@@ -155,7 +155,48 @@ The remaining gap is formalism and granularity: DDD names organizational forces 
 
 ---
 
-## 10. Conclusion
+## 10. AGM Belief Revision
+
+### Background
+
+The AGM framework (Alchourrón, Gärdenfors, Makinson, 1985) is the canonical formal theory of rational belief revision. It defines three operations on a **belief set** K — a logically closed, consistent set of sentences:
+
+- **Expansion** (K + p): add a new belief without removing anything
+- **Contraction** (K − p): remove a belief while retaining as much as possible (minimal change)
+- **Revision** (K ∗ p): add a belief that may conflict with existing ones; conflicting beliefs are retracted first (Levi Identity: revision = contraction + expansion)
+
+The AGM postulates define rationality constraints — what a belief set must satisfy before and after each operation. Epistemic entrenchment provides an ordering over beliefs that governs which are given up first under contraction.
+
+### Relation to abstractlang
+
+AGM is the closest existing formal theory to abstractlang's cognitive act family. The choice of **Bounded Belief** over Bounded Knowledge for BB is in part a signal of this lineage.
+
+**Operational mapping:**
+
+| AGM | abstractlang |
+|-----|-------------|
+| Belief set K | BB |
+| Expansion (K + p) | reflex |
+| Contraction (K − p) | retract (hard delete, recorded in error) |
+| Revision (K ∗ p) | reflex of new + negate of conflicting (two separate acts) |
+| — | negate (no AGM equivalent) |
+| — | reclame (no AGM equivalent) |
+
+The mapping is instructive but breaks on three points.
+
+**Negate is not contraction.** AGM contraction *removes* a belief — it disappears from K. abstractlang's negate *asserts falsity* — it adds a sign −1 judgment, keeping the judgment explicitly in BB as a negated entry. The conflict between a reflexed and a negated judgment is a first-class state, not an inconsistency to be avoided. This is the deepest structural difference.
+
+**Reclame has no AGM analog.** AGM revision is designed as a rational, minimal-change operation — once revised, the prior state is not recoverable through a named act. abstractlang's negate is reversible via reclame. Negation is not a permanent epistemic commitment; it can be undone if the judgment is found true again.
+
+**No logical closure.** AGM's K is deductively closed — it contains all logical consequences of its members. BB contains only explicitly reflected judgments. Inference is an investigative act, external to BB's structure. This makes BB tractable for implementation and distribution in a way that a logically closed belief set is not.
+
+**No epistemic entrenchment.** AGM defines an ordering over beliefs that determines which are given up first under contraction. BB has no such ordering — all judgments are structurally equal. The Person decides what to retract or negate; no policy is encoded.
+
+**Single agent vs. many.** AGM is a theory for a single rational agent. BB is designed for many Persons with communicative acts. The conflict model — same 4-tuple with both signs, surfaced during join and resolved by the receiver — has no AGM counterpart. AGM treats inconsistency as a failure to be corrected; abstractlang treats it as a navigable inter-personal state.
+
+---
+
+## 11. Conclusion
 
 | System | Judgment atom | Abstraction `:` | Self-ref root | Person BB | P2P communicative acts |
 |--------|--------------|----------------|--------------|-----------|------------------------|
@@ -167,6 +208,7 @@ The remaining gap is formalism and granularity: DDD names organizational forces 
 | Git | No | No | No | Yes (repo) | Yes |
 | CRDTs | Arbitrary | No | No | Partial | Yes |
 | DDD | No | No | No | Partial (BC) | Partial (Context Maps) |
+| AGM | No | No | No | Yes (K) | No |
 | **abstractlang** | **Yes** | **Yes (`:`)** | **Yes** | **Yes (BB)** | **Yes** |
 
-No prior system achieves all five simultaneously. abstractlang is the attempt to occupy that intersection. DDD comes closest on the organizational axis — its Bounded Context is the collective analog of BB — but operates without formal structure, epistemic bounding criteria, or individual-level semantics.
+No prior system achieves all five simultaneously. abstractlang is the attempt to occupy that intersection. DDD comes closest on the organizational axis — its Bounded Context is the collective analog of BB — but operates without formal structure, epistemic bounding criteria, or individual-level semantics. AGM comes closest on the formal belief-revision axis — its belief set K is the single-agent precursor to BB — but is logically closed, single-agent, and has no equivalent to negate, reclame, or inter-personal conflict.
