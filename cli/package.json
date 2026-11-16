@@ -1,0 +1,36 @@
+{
+  "name": "@abstractlang/cli",
+  "version": "1.0.0",
+  "description": "Read-only Abstract language tools for agents and terminals",
+  "type": "module",
+  "bin": {
+    "abstract": "./bin/abstract.js"
+  },
+  "main": "./src/cli.js",
+  "exports": {
+    ".": {
+      "types": "./src/cli.d.ts",
+      "import": "./src/cli.js"
+    }
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@abstractlang/core": "1.0.0",
+    "@abstractlang/service": "1.0.0"
+  },
+  "types": "./src/cli.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altershaman/abstractlang.git",
+    "directory": "cli"
+  }
+}

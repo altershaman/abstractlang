@@ -1,0 +1,29 @@
+
+std_capabilities.std_services
+std_cli.core
+std_cli.std_services
+std_services.core
+            ::user.runtime
+
+std_cli.abstractlang_repo
+std_capabilities.lsp
+ext_capabilities.lsp
+lang_services.abstractlang_repo
+std_services.lang_services
+            ::member.union
+
+core.abstractlang_repo
+lang_extensions.abstractlang_repo
+lsp.abstractlang_repo
+            ::member.union
+
+knowledge_structure.lang_extensions::member.union
+
+
+*repo
+member.union*repo
+user.required*repo
+user.runtime*repo
+repo.title:"repo"
+
+`origami = {"ontologies":[{"key":"repo","presentation":{"nesting":["member.union"],"edges":["user.required","user.runtime"],"off":[],"hideNodes":[]}}],"styles":{"notations":{},"type_notation":{}},"taxonomy":{"nesting":[],"edges":["abstraction"],"off":[],"hideNodes":[]},"exposures":[]}
