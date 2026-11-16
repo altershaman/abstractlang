@@ -1,77 +1,63 @@
-# Abstract Language
+# Abstract
 
-> [!TIP]
-> Formal language for expressing knowledge about worlds. 
->
-> [Why 'yet another knowledge system'?](/abstractlang_comparative.md)
+Abstract records knowledge claims through judgments about relationships and their abstractions. Matching words coincide by default; contextual references, detachment and explicit identity let authors refine concept identity.
 
----
-In Abstract Language (abstractlang) the only precise irreducible knowledge unit which cannot be decomposed further without losing the knowledge is **judgment**.
+```abstract
+engine.car::part.whole
+motor.car::power_unit.mechanism
+(engine:part.whole).(motor:power_unit.mechanism)::.
+```
 
-**Person** performs cognitive acts and produces judgments:
-* reflects observable into judgments or retracts one;
-* agrees or negates on judgments communicated from other Persons;
-* and sometimes even negates or reclames on his or her own judgments produced earlier.
+This repository provides the reusable language implementation and standard tools. Development is ongoing. The Knowledge structures extension is a specification draft; its ontology and domain syntax is not implemented by the parser.
 
-All Person's judgments constitute **Bounded Belief (BB)**:
-* bounded by personality;
-* bounded by application or interest;
-* bounded by cognition capability;
-* bounded by global root (see yin.yang section).
+## Components
 
-In short, each Person holds their own semantics — no shared universal interpretation.
+| Directory | Responsibility |
+|---|---|
+| `core/` | Parser, expansion, interpretation, type declarations and tests |
+| `core/docs/` | Original language specification and supporting articles |
+| `service/` | Standard analysis, diagnostics, navigation, completion, semantic tokens, hints, detachment proposals and a separate Node file resolver |
+| `lsp/` | Standard stdio language server, protocol documentation and tests |
+| `cli/` | Read-only validation, expansion and inspection for terminals and agents |
+| `extensions/knowledge-structures/` | Proposed ontology and domain specifications |
 
-From inside, a Person holds no judgment they believe false — their BB *is* their knowledge. From outside, those same judgments are beliefs until inter-personally validated. Consensus through communicative acts is what elevates private belief to shared knowledge, without altering the structure of BB itself.
+Start with [why](core/docs/why.md), [core](core/docs/core.md) and [sugar](core/docs/sugar.md). See [Knowledge structures](extensions/knowledge-structures/README.md) for the extension. The original language documents live in `core/docs/`; there are no generated documentation copies.
 
-Abstractlang proposes formalism: syntax, semantics and acts for this ancientest process.
+Core has no filesystem, UI or editor dependency. Service builds on core. The LSP uses service; the CLI uses core and the service file resolver. IDE clients, Markdown integration, visualizations and storage belong to ecosystem applications and are not required here.
 
-## Core syntax and semantics
-![](/abstractlang_BB.svg)
-### Judgment
-Judgment expression looks like `C.D:A.B`:
-- **A**, **B**, **C**, **D** are concepts;
-- **.**	relating operator, binds two concepts into a directed relation;
-- **:**	abstracting operator, left relation is concretization, instance, exemplar, manifest or **declaration** of right more abstract relation which is **abstraction** above, class or type of, generalization of left.
+## Setup and verification
 
-> [!IMPORTANT]
-> It's fully Person's liability to honor abstraction rule. Abstractlang itself has no mechanics to check if judgment really abstraction and not composition, similarity, analogy, etc. But such tooling may be built outside abstractlang itself.
+Use Node.js 22+ for repository development and npm dependency installation. The individual runtime packages declare Node.js 20+ support.
 
-#### Canonical and mirroring forms
-Judgments are directed by design, but there are two options to put them down. C.D:A.B is naturaly the same as D.C:B.A. For uniformity purpose it's good practice to choose one 'canonical' form of two and use it consistently. But it's optional for tools developers.
+```sh
+npm ci
+npm test
+npm run test:types
+```
 
-#### Contradictions
-Judgments are immutable by nature. If Person changes judgment he or she produces new judgment. And if semantic contradiction rised between two judgments after new judgment reflected into BB, Person inclines to **negate** false one or even **retract** it (hard remove from BB without traces).
+The JavaScript sources run directly. No compilation or bundle build is required for the standard tools.
 
-> [!NOTE]
-> Negation may occur without new reflection, i.e. Person found their previously reflected judgment is false for now.
-> Negation reversable -- could be reclamed if found true for now.
+## Standard tools
 
-#### Relations
-Relations are structural constituents of judgments — derived from the judgment set, never created directly and possess no knowledge. So there is no 'hanged' relations in BB. They are immutable as judgments are. If person 'edit' relation, he or she produces a new judgment with 'edited' declaration or abstraction.
+```sh
+node lsp/bin/abstract-lsp.js --stdio
+node cli/bin/abstract.js validate --json /path/to/main.abstract
+node cli/bin/abstract.js inspect --json /path/to/main.abstract
+```
 
-#### Concepts
-Concepts are titled arbitrary pieces of data, not knowledge yet. They couldn't be created alone as relations are. Concepts are subproducts of reflecting judgments. But unlike relations and judgments they are mutable. 
-> [!IMPORTANT]
-> It's fully Person's liability to decide where is cutting edge of changes behind which it is another concept already.
+Configure an IDE's LSP client to launch `node` with the absolute path to `lsp/bin/abstract-lsp.js` and `--stdio`. Stdout is reserved for protocol messages. See the [LSP guide](lsp/README.md) and [CLI guide](cli/README.md).
 
-### Bounded Belief (BB)
-Any BB is simply list of Person's judgments from storage structure point of view and is DAG (Directed Acyclic Graph) from semantic point:
-- relations could take positions in concrete (left) or in abstract (right) of judgments forming graph;
-- BB is expected to be connected: every judgment should have a path to the root. Isolated judgments are not invalid, but carry no navigable meaning.
-- BB should stay acyclic because 'abstraction' has one way semantic meaning. Cycles or loops corrupt knowledge with one exception -- 'root';
-- structurally any BB bounded from top by single universal 'root' judgment: yin.yang:yin.yang
+## Use as a submodule
 
-> #### The Root: `yin.yang:yin.yang`
-> Every BB is pre-seeded with (or must have) one judgment:
-> ```
-> yin.yang:yin.yang
-> ```
-> The only judgment where both sides are the same. It reads:
-> *"yin to yang relation is a concrete case of yin to yang relation"*
-> Self-referential — the primal polarity is its own abstraction. Every judgment chain must eventually reach this point. The structure closes on itself here — which is the fractal structure the project name describes.
+A consuming repository can pin this source tree as a Git submodule:
 
-## Interacting BB (tool dependent)
-There are three interacting families in abstractlang:
-1. Cognitive: reflex, retract, negate, reclame, edit (concepts) -- see previous section;
-2. Investigative: queries, projections, filters, traverse, renders (TBD)
-3. Communicative: dispense, acquire/consent (TBD)
+```sh
+git submodule add https://github.com/altershaman/abstractlang.git vendor/abstractlang
+npm --prefix vendor/abstractlang ci
+```
+
+For an existing checkout, initialize submodules with `git submodule update --init --recursive`, then install dependencies in the submodule. The consuming repository records the selected Abstract commit. Updating that commit and rebuilding any generated application artifacts are explicit host-project actions.
+
+Applications may call the libraries directly. Browser consumers can bundle core and the browser-safe `@abstractlang/service/analysis` entry point or selected pure service modules. The Node file resolver is separate. CLI and LSP processes are optional application entry points, not prerequisites for direct library use.
+
+This source repository is licensed under [MIT](LICENSE). Repository metadata points to the existing Abstractlang remote; these instructions do not imply that local changes have already been pushed there.

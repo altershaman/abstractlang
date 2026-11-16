@@ -1,0 +1,33 @@
+{
+  "name": "@abstractlang/core",
+  "version": "1.0.0",
+  "description": "Pure Abstract language parser, sugar expansion and contextual interpretation",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "docs"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "json5": "2.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altershaman/abstractlang.git",
+    "directory": "core"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@abstractlang/service",
+  "version": "1.0.0",
+  "description": "Reusable Abstract document analysis and navigation service",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./analysis": {
+      "types": "./src/service.d.ts",
+      "import": "./src/service.js"
+    },
+    "./files": {
+      "types": "./src/files.d.ts",
+      "import": "./src/files.js"
+    },
+    "./tokens": {
+      "types": "./src/tokens.d.ts",
+      "import": "./src/tokens.js"
+    },
+    "./navigation": {
+      "types": "./src/navigation.d.ts",
+      "import": "./src/navigation.js"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@abstractlang/core": "1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altershaman/abstractlang.git",
+    "directory": "service"
+  }
+}
