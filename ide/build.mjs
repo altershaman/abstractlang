@@ -1,0 +1,10 @@
+import {build} from 'esbuild';
+import {mkdir,copyFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url),dist=new URL('vscode/dist/',import.meta.url);
+await mkdir(dist,{recursive:true});
+await build({absWorkingDir:root.pathname,entryPoints:['ide/vscode/src/extension.cjs'],outfile:new URL('extension.cjs',dist).pathname,bundle:true,platform:'node',target:'node20',format:'cjs',external:['vscode']});
+const server=await build({absWorkingDir:root.pathname,entryPoints:['lsp/bin/abstract-lsp.js'],outfile:new URL('server.cjs',dist).pathname,bundle:true,platform:'node',target:'node20',format:'cjs',metafile:true});
+for(const name of Object.keys(server.metafile.inputs))if(name.startsWith('workspace/')||name.startsWith('preview/'))throw new Error('Nonstandard server dependency: '+name);
+await mkdir(new URL('zed/server/',import.meta.url),{recursive:true});
+await copyFile(new URL('server.cjs',dist),new URL('zed/server/abstract-lsp.cjs',import.meta.url));
+console.log('Built reference IDE clients with the standard Abstract LSP.');

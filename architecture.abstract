@@ -15,6 +15,9 @@ std_services.lang_services
 core.abstractlang_repo
 lang_extensions.abstractlang_repo
 lsp.abstractlang_repo
+ide_ext.abstractlang_repo
+zed_ext.ide_ext
+vs_code_ext.ide_ext
             ::member.union
 
 knowledge_structure.lang_extensions::member.union

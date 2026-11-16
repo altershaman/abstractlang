@@ -1,0 +1,27 @@
+{
+  "name": "abstractlang-ide-development",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "vscode"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.js",
+    "package:vscode": "node package-vscode.mjs",
+    "package:zed": "node package-zed.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "@vscode/vsce": "4.1.1",
+    "yazl": "3.3.1"
+  },
+  "overrides": {
+    "@vscode/vsce": {
+      "minimatch": "11.0.1"
+    }
+  }
+}

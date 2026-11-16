@@ -1,0 +1,8 @@
+name = "Abstract"
+path_suffixes = ["abstract"]
+line_comments = ["// "]
+tab_size = 4
+hard_tabs = false
+word_characters = ["_", "-"]
+code_fence_block_name = "abstract"
+increase_indent_pattern = '(?:^|[^:])(?:\.|::)\s*(?://.*)?$'

@@ -1,0 +1,16 @@
+{
+  "languages": {
+    "Abstract": {
+      "language_servers": [
+        "abstract"
+      ],
+      "semantic_tokens": "combined",
+      "format_on_save": "off",
+      "inlay_hints": {
+        "enabled": true,
+        "show_other_hints": true
+      }
+    }
+  },
+  "code_lens": "off"
+}

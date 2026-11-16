@@ -1,0 +1,87 @@
+[
+  {
+    "token_type": "term",
+    "token_modifiers": [
+      "abstraction",
+      "rootAbstraction"
+    ],
+    "style": [
+      "type",
+      "variable"
+    ],
+    "font_weight": "bold"
+  },
+  {
+    "token_type": "term",
+    "token_modifiers": [
+      "concretization",
+      "abstraction"
+    ],
+    "style": [
+      "function",
+      "type",
+      "variable"
+    ]
+  },
+  {
+    "token_type": "term",
+    "token_modifiers": [
+      "abstraction"
+    ],
+    "style": [
+      "type",
+      "variable"
+    ]
+  },
+  {
+    "token_type": "term",
+    "token_modifiers": [
+      "concretization"
+    ],
+    "style": [
+      "variable"
+    ]
+  },
+  {
+    "token_type": "term",
+    "style": [
+      "variable"
+    ]
+  },
+  {
+    "token_type": "dot",
+    "style": [
+      "keyword",
+      "operator"
+    ]
+  },
+  {
+    "token_type": "doubleColon",
+    "style": [
+      "keyword",
+      "operator"
+    ]
+  },
+  {
+    "token_type": "bang",
+    "style": [
+      "operator",
+      "keyword"
+    ],
+    "foreground_color": "#D8B48A",
+    "font_weight": "normal"
+  },
+  {
+    "token_type": "colon",
+    "style": [
+      "keyword",
+      "operator"
+    ]
+  },
+  {
+    "token_type": "comment",
+    "style": [
+      "comment"
+    ]
+  }
+]

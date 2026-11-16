@@ -1,0 +1,169 @@
+{
+  "name": "abstractlang",
+  "displayName": "Abstract",
+  "publisher": "abstractlang",
+  "version": "1.0.0",
+  "description": "Abstract language support through the standard Abstract LSP",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altershaman/abstractlang.git",
+    "directory": "ide/vscode"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./dist/extension.cjs",
+  "activationEvents": [
+    "onLanguage:abstract"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "abstract",
+        "aliases": [
+          "Abstract",
+          "abstract"
+        ],
+        "extensions": [
+          ".abstract"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "abstract",
+        "scopeName": "source.abstract",
+        "path": "./syntaxes/abstract.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "abstract.restartLanguageServer",
+        "title": "Abstract: Restart Language Server"
+      }
+    ],
+    "configuration": {
+      "title": "Abstract",
+      "properties": {
+        "abstract.server.path": {
+          "type": "string",
+          "default": "",
+          "description": "Optional path to an Abstract 1.x LSP Node entry point. Leave empty to use the bundled server."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[abstract]": {
+        "editor.semanticHighlighting.enabled": true,
+        "editor.inlayHints.enabled": "on",
+        "editor.codeLens": false
+      },
+      "editor.semanticTokenColorCustomizations": {
+        "rules": {
+          "term.rootAbstraction:abstract": {
+            "bold": true
+          },
+          "bang:abstract": {
+            "foreground": "#D8B48A",
+            "bold": false
+          }
+        }
+      }
+    },
+    "semanticTokenTypes": [
+      {
+        "id": "term",
+        "superType": "variable",
+        "description": "An Abstract term"
+      },
+      {
+        "id": "dot",
+        "superType": "operator",
+        "description": "The relationship dot"
+      },
+      {
+        "id": "doubleColon",
+        "superType": "operator",
+        "description": "The :: marker"
+      },
+      {
+        "id": "bang",
+        "superType": "operator",
+        "description": "The ! marker"
+      },
+      {
+        "id": "colon",
+        "superType": "operator",
+        "description": "The contextual reference colon"
+      }
+    ],
+    "semanticTokenModifiers": [
+      {
+        "id": "concretization",
+        "description": "Term on the concrete side of a judgment"
+      },
+      {
+        "id": "abstraction",
+        "description": "Term on the abstract side of a judgment"
+      },
+      {
+        "id": "reference",
+        "description": "Term in an explicit contextual reference"
+      },
+      {
+        "id": "rootAbstraction",
+        "description": "A terminal abstraction in the current positive judgment graph"
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "abstract",
+        "scopes": {
+          "term": [
+            "variable.other.abstract"
+          ],
+          "term.concretization": [
+            "variable.other.abstract"
+          ],
+          "term.abstraction": [
+            "entity.name.type.abstract"
+          ],
+          "term.concretization.abstraction": [
+            "entity.name.function.abstract"
+          ],
+          "dot": [
+            "keyword.operator.abstraction.abstract"
+          ],
+          "doubleColon": [
+            "keyword.operator.abstraction.abstract"
+          ],
+          "bang": [
+            "keyword.operator.negation.abstract"
+          ],
+          "colon": [
+            "keyword.operator.abstraction.abstract"
+          ]
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "vscode-languageclient": "9.0.1"
+  },
+  "files": [
+    "dist",
+    "syntaxes",
+    "language-configuration.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "vscode:prepublish": "node ../build.mjs"
+  },
+  "type": "module"
+}

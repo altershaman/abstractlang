@@ -1,0 +1,34 @@
+{
+  "name": "Abstract",
+  "scopeName": "source.abstract",
+  "patterns": [
+    {
+      "name": "comment.line.double-slash.abstract",
+      "match": "//.*$"
+    },
+    {
+      "name": "keyword.operator.identity.abstract",
+      "match": "::\\."
+    },
+    {
+      "name": "keyword.operator.abstraction.abstract",
+      "match": "::|!"
+    },
+    {
+      "name": "keyword.operator.abstraction.abstract",
+      "match": ":"
+    },
+    {
+      "name": "keyword.operator.abstraction.abstract",
+      "match": "\\."
+    },
+    {
+      "name": "punctuation.section.group.abstract",
+      "match": "[()]"
+    },
+    {
+      "name": "variable.other.abstract",
+      "match": "[\\p{L}\\p{N}_-][\\p{L}\\p{N}\\p{M}_-]*"
+    }
+  ]
+}

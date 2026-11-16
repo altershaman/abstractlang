@@ -19,11 +19,12 @@ This repository provides the reusable language implementation and standard tools
 | `service/` | Standard analysis, diagnostics, navigation, completion, semantic tokens, hints, detachment proposals and a separate Node file resolver |
 | `lsp/` | Standard stdio language server, protocol documentation and tests |
 | `cli/` | Read-only validation, expansion and inspection for terminals and agents |
+| `ide/` | Reference VS Code and Zed clients for the standard LSP |
 | `extensions/knowledge-structures/` | Proposed ontology and domain specifications |
 
 Start with [why](core/docs/why.md), [core](core/docs/core.md) and [sugar](core/docs/sugar.md). See [Knowledge structures](extensions/knowledge-structures/README.md) for the extension. The original language documents live in `core/docs/`; there are no generated documentation copies.
 
-Core has no filesystem, UI or editor dependency. Service builds on core. The LSP uses service; the CLI uses core and the service file resolver. IDE clients, Markdown integration, visualizations and storage belong to ecosystem applications and are not required here.
+Core has no filesystem, UI or editor dependency. Service builds on core. The LSP uses service; the CLI uses core and the service file resolver. Reference IDE clients live in `ide/` with optional build dependencies. Markdown integration, visualizations and storage belong to ecosystem applications.
 
 ## Setup and verification
 
@@ -46,6 +47,10 @@ node cli/bin/abstract.js inspect --json /path/to/main.abstract
 ```
 
 Configure an IDE's LSP client to launch `node` with the absolute path to `lsp/bin/abstract-lsp.js` and `--stdio`. Stdout is reserved for protocol messages. See the [LSP guide](lsp/README.md) and [CLI guide](cli/README.md).
+
+## Reference IDE clients
+
+See [ide/README.md](ide/README.md) for VS Code and Zed builds, installation and server configuration. Their build requirements are separate from the standard language tools.
 
 ## Use as a submodule
 
