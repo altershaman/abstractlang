@@ -1,0 +1,6 @@
+node_modules/
+vscode/dist/
+zed/server/
+zed/extension.wasm
+zed/target/
+dist/

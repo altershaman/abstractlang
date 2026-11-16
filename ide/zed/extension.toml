@@ -1,0 +1,19 @@
+id = "abstractlang"
+name = "Abstract"
+version = "1.0.0"
+schema_version = 1
+authors = ["Abstract language contributors"]
+description = "Abstract language registration and local language server support."
+repository = "https://github.com/altershaman/abstractlang"
+languages = ["languages/abstract"]
+
+[lib]
+kind = "Rust"
+version = "0.7.0"
+
+[language_servers.abstract]
+name = "Abstract Language Server"
+languages = ["Abstract"]
+
+[language_servers.abstract.language_ids]
+Abstract = "abstract"

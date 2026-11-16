@@ -1,0 +1,17 @@
+import {spawnSync} from 'node:child_process';
+import {createWriteStream} from 'node:fs';
+import {mkdir,copyFile} from 'node:fs/promises';
+import {pipeline} from 'node:stream/promises';
+import yazl from 'yazl';
+import './build.mjs';
+const root=new URL('./',import.meta.url);
+const result=spawnSync('cargo',['build','--manifest-path',new URL('zed/Cargo.toml',root).pathname,'--target','wasm32-wasip2','--release'],{stdio:'inherit'});
+if(result.status!==0)throw new Error('Zed adapter build failed. Install Rust and wasm32-wasip2.');
+await copyFile(new URL('zed/target/wasm32-wasip2/release/zed_abstractlang.wasm',root),new URL('zed/extension.wasm',root));
+await mkdir(new URL('dist/',root),{recursive:true});
+const zip=new yazl.ZipFile();
+for(const name of ['extension.toml','Cargo.toml','Cargo.lock','README.md','settings.example.json','src/lib.rs','server/abstract-lsp.cjs','languages/abstract/config.toml','languages/abstract/semantic_token_rules.json'])zip.addFile(new URL('zed/'+name,root).pathname,'abstractlang/'+name);
+zip.addFile(new URL('../LICENSE',root).pathname,'abstractlang/LICENSE');
+zip.addFile(new URL('zed/target/wasm32-wasip2/release/zed_abstractlang.wasm',root).pathname,'abstractlang/extension.wasm');
+const finished=pipeline(zip.outputStream,createWriteStream(new URL('dist/abstractlang-zed-1.0.0.zip',root)));zip.end();await finished;
+console.log('Created dist/abstractlang-zed-1.0.0.zip');
